@@ -28,14 +28,14 @@ export default function Carousel() {
   return (
     <div
     className="relative w-full overflow-hidden"
-    style={{ height: "calc(100vh - 69px)" }}
+    style={{ height: "calc(100vh - 86px)" }}
     >
     <div
         className="flex transition-transform duration-1000"
         style={{ transform: `translateX(-${current * 100}%)` }}
     >
         {images.map((src, i) => (
-        <div key={i} className="min-w-full relative" style={{ height: "calc(100vh - 69px)" }}>
+        <div key={i} className="min-w-full relative aspect-video sm:aspect-auto" style={{ height: "calc(100vh - 86px)" }}>
             <Image
             src={src}
             alt={`Slide ${i + 1}`}
