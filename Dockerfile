@@ -28,7 +28,8 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
-
+ARG NEXT_PUBLIC_API_CHATBOT_URL
+ENV NEXT_PUBLIC_API_CHATBOT_URL=$NEXT_PUBLIC_API_CHATBOT_URL
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
