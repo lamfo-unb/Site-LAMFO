@@ -3,33 +3,51 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Loader2 } from 'lucide-react';
 
-const ChatBot = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      type: 'bot',
-      content: 'Olá! Sou o assistente do LAMFO. Como posso ajudá-lo hoje?',
-      timestamp: new Date()
-    }
-  ]);
-  const [inputMessage, setInputMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+interface Message {
+  id: number;
+  type: 'user' | 'bot';
+  content: string;
+  timestamp: Date;
+}
+
+const ChatBot: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputMessage, setInputMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Inicializar mensagem de boas-vindas apenas no cliente
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if (!isInitialized) {
+      setMessages([
+        {
+          id: 1,
+          type: 'bot',
+          content: 'Olá! Sou o assistente do LAMFO. Como posso ajudá-lo hoje?',
+          timestamp: new Date()
+        }
+      ]);
+      setIsInitialized(true);
+    }
+  }, [isInitialized]);
 
-  const sendMessage = async (e) => {
+  useEffect(() => {
+    if (isInitialized) {
+      scrollToBottom();
+    }
+  }, [messages, isInitialized]);
+
+  const sendMessage = async (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     
     if (!inputMessage.trim() || isLoading) return;
 
-    const userMessage = {
+    const userMessage: Message = {
       id: Date.now(),
       type: 'user',
       content: inputMessage,
@@ -57,7 +75,7 @@ const ChatBot = () => {
 
       const data = await response.json();
       
-      const botMessage = {
+      const botMessage: Message = {
         id: Date.now() + 1,
         type: 'bot',
         content: data.result.response.content || 'Desculpe, não consegui processar sua mensagem.',
@@ -68,7 +86,7 @@ const ChatBot = () => {
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
       
-      const errorMessage = {
+      const errorMessage: Message = {
         id: Date.now() + 1,
         type: 'bot',
         content: 'Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente.',
@@ -81,12 +99,34 @@ const ChatBot = () => {
     }
   };
 
-  const formatTime = (timestamp) => {
+  const formatTime = (timestamp: Date): string => {
+    if (!timestamp) return '';
     return timestamp.toLocaleTimeString('pt-BR', { 
       hour: '2-digit', 
       minute: '2-digit' 
     });
   };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(e);
+    }
+  };
+
+  // Renderizar loading state durante inicialização
+  if (!isInitialized) {
+    return (
+      <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="flex items-center space-x-2">
+            <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
+            <span className="text-gray-600">Carregando chatbot...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -171,12 +211,7 @@ const ChatBot = () => {
                 onChange={(e) => setInputMessage(e.target.value)}
                 placeholder="Digite sua mensagem..."
                 disabled={isLoading}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage(e);
-                  }
-                }}
+                onKeyPress={handleKeyPress}
                 className="w-full px-4 py-3 pr-12 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
