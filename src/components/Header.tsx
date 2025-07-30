@@ -33,7 +33,8 @@ export default function Header() {
         </div>
 
         <div className="hidden lg:flex lg:gap-x-12">
-          <Link href="#" className="text-sm font-semibold text-gray-900">PSEL</Link>
+          <Link href="/chat" className="text-sm font-semibold text-gray-900">Chatbot</Link>
+          <Link href="#" className="text-sm font-semibold text-gray-900">Informações sobre o PSEL</Link>
         </div>
       </nav>
 
