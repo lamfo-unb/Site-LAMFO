@@ -9,7 +9,6 @@ import { Transition } from "@headlessui/react";
 
 const navigation = [
   { name: 'Chatbot', href: '/chat', icon: MessageCircle },
-  { name: 'Informações sobre o PSEL', href: '#', icon: Info },
 ];
 
 export default function Header() {
