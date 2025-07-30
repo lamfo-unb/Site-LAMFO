@@ -23,4 +23,4 @@ Para rodar o projeto basta seguir os seguintes passos:
 
 Para contribuir, a branche main está bloqueada, então será somente habilitado dar merge para ela caso você faça um pull request, então o recomendado é você criar uma branch com o padrão `feat/seunome-descricao` e depois pedir um pull request.
 
-**IMPORTANTE**: TUDO que for para main será automáticamente enviado para produção e caso tenha variáveis de ambiente novas é preciso configura-las manualmente no servidor, então avise os responsáveis para fazerem isso antes de você subir sua alteração ou deixe explicito no pull request que o que é preciso adicionar. 
+**IMPORTANTE**: TUDO que for para main será automáticamente enviado para produção e caso tenha variáveis de ambiente novas é preciso configura-las manualmente no servidor, então avise os responsáveis para fazerem isso antes de você subir sua alteração ou deixe explicito no pull request que o que é preciso adicionar.   
