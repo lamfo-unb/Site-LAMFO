@@ -11,6 +11,7 @@ interface Message {
 }
 
 const ChatBot: React.FC = () => {
+  const chatBotAPIUrl = process.env.NEXT_PUBLIC_API_CHATBOT_URL;
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -59,7 +60,8 @@ const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://lamfo.org/api/lamfo-gpt/chat', {
+      if (chatBotAPIUrl) {
+              const response = await fetch(chatBotAPIUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,6 +85,9 @@ const ChatBot: React.FC = () => {
       };
 
       setMessages(prev => [...prev, botMessage]);
+      } else {
+        throw new Error('URL da API do chatbot não está definida.');
+      }
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
       

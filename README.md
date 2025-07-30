@@ -15,7 +15,8 @@ Esse projeto roda com Node.js, utilizando Typescript como linguagem de programa�
 Para rodar o projeto basta seguir os seguintes passos:
 
 1. execute o comando `npm install` para instalar as dependências.
-2. Agora inicie a aplicação com o comando `npm run dev`.
+2. Pedir o arquivo com as variáveis de ambiente para os responsáveis do projeto.
+2. Inicie a aplicação com o comando `npm run dev`.
 3. Acesse o localhost na porta 3000 que você verá o site rodando.
 
 ## Contribuições
