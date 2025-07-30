@@ -28,6 +28,8 @@ jobs:
           context: .
           push: true
           tags: dauid64/site-lamfo:latest
+          build-args: |
+            NEXT_PUBLIC_API_CHATBOT_URL=${{ vars.NEXT_PUBLIC_API_CHATBOT_URL }}
 
   deploy:
     needs: build
