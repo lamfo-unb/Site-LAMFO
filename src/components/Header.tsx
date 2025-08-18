@@ -4,11 +4,12 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle, Info } from "lucide-react";
+import { Menu, X, MessageCircle, Info, Users, FolderOpen } from "lucide-react";
 import { Transition } from "@headlessui/react";
 
 const navigation = [
   { name: 'Chatbot', href: '/chat', icon: MessageCircle },
+  { name: 'Membros', href: '/members', icon: Users },
   { name: 'Informações sobre o PSEL', href: '#', icon: Info },
 ];
 
