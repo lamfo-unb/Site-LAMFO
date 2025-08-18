@@ -1,0 +1,104 @@
+# LAMFO Members Information
+# This file contains information about current and past members of LAMFO
+
+[coordinators]
+  [[coordinators.member]]
+    name = "Prof. Dr. Pedro Henrique Melo Albuquerque"
+    role = "Coordenador Geral"
+    department = "Departamento de Administração - UnB"
+    bio = "Professor do Departamento de Administração da UnB e coordenador do LAMFO. Especialista em finanças e análise de dados."
+    email = "pedro.albuquerque@unb.br"
+    image = "/members/pedro.jpg"
+    linkedin = "https://linkedin.com/in/pedro-albuquerque"
+    lattes = "http://lattes.cnpq.br/pedro-albuquerque"
+    
+  [[coordinators.member]]
+    name = "Prof. Dr. Vinícius Amorim Sobreiro"
+    role = "Vice-Coordenador"
+    department = "Departamento de Administração - UnB"
+    bio = "Professor do Departamento de Administração da UnB. Especialista em finanças quantitativas e machine learning."
+    email = "vinicius.sobreiro@unb.br"
+    image = "/members/vinicius.jpg"
+    linkedin = "https://linkedin.com/in/vinicius-sobreiro"
+    lattes = "http://lattes.cnpq.br/vinicius-sobreiro"
+
+[professors]
+  [[professors.member]]
+    name = "Prof. Dr. Eduardo Yoshio Nakano"
+    role = "Professor Colaborador"
+    department = "Departamento de Estatística - UnB"
+    bio = "Professor do Departamento de Estatística da UnB. Especialista em estatística aplicada e análise de dados."
+    email = "eduardo.nakano@unb.br"
+    image = "/members/eduardo.jpg"
+    linkedin = "https://linkedin.com/in/eduardo-nakano"
+    lattes = "http://lattes.cnpq.br/eduardo-nakano"
+
+[current_students]
+  [[current_students.member]]
+    name = "Ana Silva"
+    role = "Mestranda"
+    program = "Programa de Pós-Graduação em Administração"
+    research_area = "Finanças Comportamentais"
+    bio = "Mestranda em Administração com foco em finanças comportamentais e análise de sentimento em mercados financeiros."
+    email = "ana.silva@aluno.unb.br"
+    image = "/members/ana.jpg"
+    linkedin = "https://linkedin.com/in/ana-silva"
+    lattes = "http://lattes.cnpq.br/ana-silva"
+    
+  [[current_students.member]]
+    name = "Carlos Santos"
+    role = "Doutorando"
+    program = "Programa de Pós-Graduação em Administração"
+    research_area = "Machine Learning em Finanças"
+    bio = "Doutorando em Administração pesquisando aplicações de machine learning em previsão de preços de ativos financeiros."
+    email = "carlos.santos@aluno.unb.br"
+    image = "/members/carlos.jpg"
+    linkedin = "https://linkedin.com/in/carlos-santos"
+    lattes = "http://lattes.cnpq.br/carlos-santos"
+    
+  [[current_students.member]]
+    name = "Maria Oliveira"
+    role = "Graduanda"
+    program = "Administração"
+    research_area = "Análise de Risco"
+    bio = "Graduanda em Administração com iniciação científica em análise de risco e modelagem estatística."
+    email = "maria.oliveira@aluno.unb.br"
+    image = "/members/maria.jpg"
+    linkedin = "https://linkedin.com/in/maria-oliveira"
+
+[alumni]
+  [[alumni.member]]
+    name = "Dr. João Pereira"
+    role = "Ex-Doutorando"
+    graduation_year = "2023"
+    current_position = "Analista Quantitativo - BTG Pactual"
+    thesis_title = "Aplicações de Deep Learning em Análise de Crédito"
+    bio = "Doutor em Administração pelo LAMFO, atualmente trabalhando como analista quantitativo no BTG Pactual."
+    email = "joao.pereira@btgpactual.com"
+    image = "/members/joao.jpg"
+    linkedin = "https://linkedin.com/in/joao-pereira"
+    
+  [[alumni.member]]
+    name = "Dra. Fernanda Costa"
+    role = "Ex-Mestranda"
+    graduation_year = "2022"
+    current_position = "Cientista de Dados - Banco Central do Brasil"
+    thesis_title = "Análise de Séries Temporais em Mercados Emergentes"
+    bio = "Mestre em Administração pelo LAMFO, atualmente trabalhando como cientista de dados no Banco Central."
+    email = "fernanda.costa@bcb.gov.br"
+    image = "/members/fernanda.jpg"
+    linkedin = "https://linkedin.com/in/fernanda-costa"
+
+[research_areas]
+  areas = [
+    "Machine Learning em Finanças",
+    "Análise de Séries Temporais",
+    "Finanças Comportamentais",
+    "Análise de Risco",
+    "Econofísica",
+    "Otimização de Portfólio",
+    "Análise de Sentimento em Mercados",
+    "Deep Learning",
+    "Processamento de Linguagem Natural",
+    "Análise de Redes Financeiras"
+  ]
