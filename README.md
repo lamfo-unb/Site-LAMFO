@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Site LAMFO
 
-## Getting Started
+Este repositório é referente ao site do LAMFO no domínio lamfo.org que está disponível na URL https://lamfo.org. Esse projeto tem como intuito criar um site totalmente personalizado por nós do LAMFO para divulgarmos o laboratório.
 
-First, run the development server:
+## Sobre
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Esse projeto roda com Node.js, utilizando Typescript como linguagem de programaçõa e com o Framework Next.js.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node (LTS)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuração
 
-## Learn More
+Para rodar o projeto basta seguir os seguintes passos:
 
-To learn more about Next.js, take a look at the following resources:
+1. execute o comando `npm install` para instalar as dependências.
+2. Pedir o arquivo com as variáveis de ambiente para os responsáveis do projeto.
+2. Inicie a aplicação com o comando `npm run dev`.
+3. Acesse o localhost na porta 3000 que você verá o site rodando.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contribuições
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Para contribuir, a branche main está bloqueada, então será somente habilitado dar merge para ela caso você faça um pull request, então o recomendado é você criar uma branch com o padrão `feat/seunome-descricao` e depois pedir um pull request.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**IMPORTANTE**: TUDO que for para main será automáticamente enviado para produção e caso tenha variáveis de ambiente novas é preciso configura-las manualmente no servidor, então avise os responsáveis para fazerem isso antes de você subir sua alteração ou deixe explicito no pull request que o que é preciso adicionar.
