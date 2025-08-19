@@ -60,8 +60,11 @@ const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      if (chatBotAPIUrl) {
-              const response = await fetch(chatBotAPIUrl, {
+      if (!chatBotAPIUrl) {
+        throw new Error('Serviço de chatbot temporariamente indisponível.');
+      }
+
+      const response = await fetch(chatBotAPIUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +75,7 @@ const ChatBot: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Erro HTTP: ${response.status}`);
+        throw new Error(`Erro no servidor: ${response.status}`);
       }
 
       const data = await response.json();
@@ -85,16 +88,15 @@ const ChatBot: React.FC = () => {
       };
 
       setMessages(prev => [...prev, botMessage]);
-      } else {
-        throw new Error('URL da API do chatbot não está definida.');
-      }
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
       
       const errorMessage: Message = {
         id: Date.now() + 1,
         type: 'bot',
-        content: 'Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente.',
+        content: error instanceof Error && error.message.includes('temporariamente indisponível') 
+          ? 'O serviço de chatbot está temporariamente indisponível. Por favor, tente novamente mais tarde ou entre em contato conosco através dos canais oficiais do LAMFO.'
+          : 'Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente.',
         timestamp: new Date()
       };
 
@@ -122,11 +124,23 @@ const ChatBot: React.FC = () => {
   // Renderizar loading state durante inicialização
   if (!isInitialized) {
     return (
-      <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="flex items-center space-x-2">
-            <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
-            <span className="text-gray-600">Carregando chatbot...</span>
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                  <Bot className="w-8 h-8 text-white" />
+                </div>
+              </div>
+              <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-4">
+                LAMFO Assistant
+              </h1>
+              <div className="flex items-center justify-center space-x-2 mt-8">
+                <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
+                <span className="text-gray-600">Carregando chatbot...</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -134,48 +148,54 @@ const ChatBot: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <div className="bg-white shadow-lg border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
-              <Bot className="w-6 h-6 text-white" />
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                <Bot className="w-8 h-8 text-white" />
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800">LAMFO Assistant</h1>
-              <p className="text-sm text-gray-600">Laboratório de Aprendizado de Máquina em Finanças e Organizações</p>
-            </div>
+            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-4">
+              LAMFO Assistant
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Converse com nosso assistente inteligente e tire suas dúvidas sobre o 
+              Laboratório de Aprendizado de Máquina em Finanças e Organizações.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Messages Container */}
-      <div className="flex-1 overflow-hidden">
-        <div className="max-w-4xl mx-auto h-full flex flex-col">
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Chat Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 h-[600px] flex flex-col">
+          {/* Messages Container */}
+          <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`flex max-w-xs lg:max-w-md xl:max-w-lg ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'} items-start space-x-2`}>
+                <div className={`flex max-w-xs lg:max-w-md xl:max-w-lg ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'} items-start space-x-3`}>
                   {/* Avatar */}
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === 'user' ? 'bg-blue-500 ml-2' : 'bg-gray-600 mr-2'}`}>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === 'user' ? 'bg-blue-500 ml-3' : 'bg-gray-600 mr-3'}`}>
                     {message.type === 'user' ? (
-                      <User className="w-4 h-4 text-white" />
+                      <User className="w-5 h-5 text-white" />
                     ) : (
-                      <Bot className="w-4 h-4 text-white" />
+                      <Bot className="w-5 h-5 text-white" />
                     )}
                   </div>
                   
                   {/* Message Bubble */}
-                  <div className={`rounded-lg px-4 py-2 ${message.type === 'user' 
+                  <div className={`rounded-lg px-4 py-3 ${message.type === 'user' 
                     ? 'bg-blue-500 text-white' 
-                    : 'bg-white text-gray-800 shadow-md border border-gray-200'
+                    : 'bg-gray-50 text-gray-800 border border-gray-200'
                   }`}>
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                    <p className={`text-xs mt-1 ${message.type === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
+                    <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                    <p className={`text-xs mt-2 ${message.type === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
                       {formatTime(message.timestamp)}
                     </p>
                   </div>
@@ -186,11 +206,11 @@ const ChatBot: React.FC = () => {
             {/* Loading indicator */}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="flex items-start space-x-2">
-                  <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-white" />
+                <div className="flex items-start space-x-3">
+                  <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Bot className="w-5 h-5 text-white" />
                   </div>
-                  <div className="bg-white rounded-lg px-4 py-2 shadow-md border border-gray-200">
+                  <div className="bg-gray-50 rounded-lg px-4 py-3 border border-gray-200">
                     <div className="flex items-center space-x-2">
                       <Loader2 className="w-4 h-4 animate-spin text-gray-500" />
                       <p className="text-sm text-gray-500">Digitando...</p>
@@ -202,36 +222,34 @@ const ChatBot: React.FC = () => {
             
             <div ref={messagesEndRef} />
           </div>
-        </div>
-      </div>
 
-      {/* Input Form */}
-      <div className="bg-white border-t border-gray-200 shadow-lg">
-        <div className="max-w-4xl mx-auto p-4">
-          <div className="flex space-x-4">
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Digite sua mensagem..."
-                disabled={isLoading}
-                onKeyPress={handleKeyPress}
-                className="w-full px-4 py-3 pr-12 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-              />
+          {/* Input Form */}
+          <div className="border-t border-gray-200 p-6">
+            <div className="flex space-x-4">
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  placeholder="Digite sua mensagem..."
+                  disabled={isLoading}
+                  onKeyPress={handleKeyPress}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+              </div>
+              <button
+                onClick={sendMessage}
+                disabled={!inputMessage.trim() || isLoading}
+                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2"
+              >
+                {isLoading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
+                <span className="hidden sm:inline">Enviar</span>
+              </button>
             </div>
-            <button
-              onClick={sendMessage}
-              disabled={!inputMessage.trim() || isLoading}
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2"
-            >
-              {isLoading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <Send className="w-4 h-4" />
-              )}
-              <span className="hidden sm:inline">Enviar</span>
-            </button>
           </div>
         </div>
       </div>

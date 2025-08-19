@@ -24,15 +24,36 @@ export interface ProjectsData {
   };
 }
 
+interface TomlProject {
+  name: string;
+  description: string;
+  research_area: string;
+  status: 'Ativo' | 'Concluído' | 'Em Planejamento';
+  year_started: string;
+  year_ended?: string;
+  participants: string[];
+  technologies: string[];
+  github_url?: string;
+  paper_url?: string;
+  abstract: string;
+}
+
+interface TomlData {
+  projects: TomlProject[];
+  research_areas: {
+    areas: string[];
+  };
+}
+
 // Server-side only function
 export function loadProjectsData(): ProjectsData {
   const projectsPath = join(process.cwd(), 'data', 'projects.toml');
   const fileContent = readFileSync(projectsPath, 'utf-8');
-  const parsedData = TOML.parse(fileContent) as any;
+  const parsedData = TOML.parse(fileContent) as unknown as TomlData;
   
   // Create a clean object without symbols
   const cleanData: ProjectsData = {
-    projects: parsedData.projects.map((project: any) => ({
+    projects: parsedData.projects.map((project: TomlProject) => ({
       name: project.name,
       description: project.description,
       research_area: project.research_area,
