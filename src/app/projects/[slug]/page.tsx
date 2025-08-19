@@ -11,7 +11,8 @@ import {
   Tag,
   CheckCircle,
   Circle,
-  AlertCircle
+  AlertCircle,
+  FolderOpen
 } from "lucide-react";
 import { getProjectBySlug, loadProjectsData } from "@/lib/projects";
 import { createSlug } from "@/lib/utils";
