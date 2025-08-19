@@ -103,7 +103,7 @@ export default function Carousel() {
   return (
     <section
       className="relative w-full overflow-hidden bg-gray-900"
-      style={{ height: "70vh", minHeight: "500px", maxHeight: "800px" }}
+      style={{ height: "60vh", minHeight: "500px", maxHeight: "800px" }}
       role="region"
       aria-label="Carrossel de imagens do LAMFO"
       onMouseEnter={() => setIsPaused(true)}
