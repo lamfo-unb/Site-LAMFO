@@ -103,7 +103,7 @@ export default function Carousel() {
   return (
     <section
       className="relative w-full overflow-hidden bg-gray-900"
-      style={{ height: "calc(100vh - 86px)" }}
+      style={{ height: "60vh", minHeight: "500px", maxHeight: "800px" }}
       role="region"
       aria-label="Carrossel de imagens do LAMFO"
       onMouseEnter={() => setIsPaused(true)}
@@ -121,7 +121,7 @@ export default function Carousel() {
           <div
             key={i}
             className="min-w-full relative"
-            style={{ height: "calc(100vh - 86px)" }}
+            style={{ height: "70vh", minHeight: "500px", maxHeight: "800px" }}
             role="group"
             aria-roledescription="slide"
             aria-label={`${i + 1} de ${images.length}`}
@@ -144,16 +144,16 @@ export default function Carousel() {
       {/* Main content overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold mb-4 drop-shadow-lg">
+          <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">
             Bem-vindo ao LAMFO
           </h1>
-          <p className="text-white text-lg md:text-xl lg:text-2xl font-light mb-8 drop-shadow-md max-w-2xl">
+          <p className="text-white text-base md:text-lg lg:text-xl font-light mb-6 drop-shadow-md max-w-2xl">
             Laboratório de Aprendizagem de Máquinas em Finanças e Organizações
           </p>
           
           {/* Current slide info */}
-          <div className="bg-black/40 backdrop-blur-sm rounded-lg px-6 py-4 max-w-md mx-auto">
-            <h2 className="text-white text-xl font-semibold mb-2">
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg px-4 py-3 max-w-md mx-auto">
+            <h2 className="text-white text-lg font-semibold mb-1">
               {images[current].title}
             </h2>
             <p className="text-gray-200 text-sm">
