@@ -10,6 +10,7 @@ import { Transition } from "@headlessui/react";
 const navigation = [
   { name: 'Chatbot', href: '/chat', icon: MessageCircle },
   { name: 'Membros', href: '/members', icon: Users },
+  { name: 'Projetos', href: '/projects', icon: FolderOpen },
   { name: 'Informações sobre o PSEL', href: '#', icon: Info },
 ];
 

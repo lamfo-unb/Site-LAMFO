@@ -1,0 +1,121 @@
+# LAMFO Projects Information
+# This file contains information about current and past projects of LAMFO
+
+[[projects]]
+name = "Previsão de Preços de Criptomoedas usando LSTM"
+description = "Desenvolvimento de modelos de deep learning para previsão de preços de Bitcoin e outras criptomoedas usando redes neurais LSTM."
+research_area = "Machine Learning em Finanças"
+status = "Ativo"
+year_started = "2023"
+year_ended = ""
+participants = ["Carlos Santos", "Prof. Dr. Pedro Henrique Melo Albuquerque"]
+technologies = ["Python", "TensorFlow", "Pandas", "NumPy"]
+github_url = "https://github.com/lamfo-unb/crypto-prediction"
+paper_url = ""
+abstract = "Este projeto visa desenvolver modelos preditivos robustos para o mercado de criptomoedas, utilizando técnicas avançadas de deep learning e análise de séries temporais."
+
+[[projects]]
+name = "Análise de Sentimento em Tweets sobre Mercado Financeiro"
+description = "Aplicação de processamento de linguagem natural para análise de sentimento em redes sociais e seu impacto nos mercados financeiros."
+research_area = "Processamento de Linguagem Natural"
+status = "Concluído"
+year_started = "2022"
+year_ended = "2023"
+participants = ["Ana Silva", "Prof. Dr. Vinícius Amorim Sobreiro"]
+technologies = ["Python", "NLTK", "scikit-learn", "Twitter API"]
+github_url = "https://github.com/lamfo-unb/sentiment-analysis"
+paper_url = "https://doi.org/10.1016/j.example.2023.123456"
+abstract = "Estudo sobre como o sentimento expresso em redes sociais pode influenciar as flutuações do mercado financeiro, utilizando técnicas de NLP e machine learning."
+
+[[projects]]
+name = "Otimização de Portfólio com Algoritmos Genéticos"
+description = "Desenvolvimento de estratégias de otimização de portfólio utilizando algoritmos genéticos e teoria moderna de portfólio."
+research_area = "Otimização de Portfólio"
+status = "Ativo"
+year_started = "2023"
+year_ended = ""
+participants = ["Maria Oliveira", "Prof. Dr. Eduardo Yoshio Nakano"]
+technologies = ["R", "Python", "DEAP", "cvxpy"]
+github_url = "https://github.com/lamfo-unb/portfolio-optimization"
+paper_url = ""
+abstract = "Implementação de algoritmos evolutivos para solução do problema de otimização de portfólio, considerando múltiplos objetivos e restrições."
+
+[[projects]]
+name = "Redes Neurais para Análise de Risco de Crédito"
+description = "Aplicação de deep learning na avaliação de risco de crédito bancário, comparando com métodos tradicionais."
+research_area = "Deep Learning"
+status = "Concluído"
+year_started = "2021"
+year_ended = "2023"
+participants = ["Dr. João Pereira", "Prof. Dr. Pedro Henrique Melo Albuquerque"]
+technologies = ["Python", "PyTorch", "XGBoost", "Scikit-learn"]
+github_url = "https://github.com/lamfo-unb/credit-risk-dl"
+paper_url = "https://doi.org/10.1016/j.example.2023.789012"
+abstract = "Comparação entre modelos tradicionais de credit scoring e redes neurais profundas, avaliando performance e interpretabilidade."
+
+[[projects]]
+name = "Análise de Volatilidade em Mercados Emergentes"
+description = "Estudo da volatilidade em mercados emergentes utilizando modelos GARCH e suas variações."
+research_area = "Análise de Séries Temporais"
+status = "Concluído"
+year_started = "2020"
+year_ended = "2022"
+participants = ["Dra. Fernanda Costa", "Prof. Dr. Vinícius Amorim Sobreiro"]
+technologies = ["R", "rugarch", "forecast", "quantmod"]
+github_url = "https://github.com/lamfo-unb/volatility-analysis"
+paper_url = "https://doi.org/10.1016/j.example.2022.345678"
+abstract = "Análise comparativa de modelos de volatilidade aplicados a mercados emergentes, com foco no mercado brasileiro."
+
+[[projects]]
+name = "Detecção de Anomalias em Transações Financeiras"
+description = "Desenvolvimento de sistemas de detecção de fraudes e anomalias em transações bancárias usando machine learning."
+research_area = "Machine Learning em Finanças"
+status = "Ativo"
+year_started = "2024"
+year_ended = ""
+participants = ["Carlos Santos", "Ana Silva", "Prof. Dr. Eduardo Yoshio Nakano"]
+technologies = ["Python", "scikit-learn", "Isolation Forest", "DBSCAN"]
+github_url = "https://github.com/lamfo-unb/fraud-detection"
+paper_url = ""
+abstract = "Sistema inteligente para identificação automática de padrões anômalos em transações financeiras, reduzindo falsos positivos."
+
+[[projects]]
+name = "Modelagem de Redes Financeiras com Grafos"
+description = "Análise de redes de relacionamento entre instituições financeiras e seu impacto na estabilidade sistêmica."
+research_area = "Análise de Redes Financeiras"
+status = "Em Planejamento"
+year_started = "2024"
+year_ended = ""
+participants = ["Maria Oliveira", "Prof. Dr. Pedro Henrique Melo Albuquerque"]
+technologies = ["Python", "NetworkX", "Gephi", "igraph"]
+github_url = ""
+paper_url = ""
+abstract = "Estudo das interconexões entre instituições financeiras brasileiras e modelagem de riscos sistêmicos através de teoria de grafos."
+
+[[projects]]
+name = "Previsão de Inadimplência com Ensemble Methods"
+description = "Combinação de múltiplos algoritmos de machine learning para previsão de inadimplência em cartões de crédito."
+research_area = "Análise de Risco"
+status = "Ativo"
+year_started = "2023"
+year_ended = ""
+participants = ["Ana Silva", "Carlos Santos"]
+technologies = ["Python", "XGBoost", "Random Forest", "LightGBM"]
+github_url = "https://github.com/lamfo-unb/default-prediction"
+paper_url = ""
+abstract = "Desenvolvimento de modelos ensemble para previsão de inadimplência, otimizando a combinação de diferentes algoritmos."
+
+# Research areas available for filtering
+[research_areas]
+areas = [
+  "Machine Learning em Finanças",
+  "Análise de Séries Temporais",
+  "Finanças Comportamentais",
+  "Análise de Risco",
+  "Econofísica",
+  "Otimização de Portfólio",
+  "Análise de Sentimento em Mercados",
+  "Deep Learning",
+  "Processamento de Linguagem Natural",
+  "Análise de Redes Financeiras"
+]
