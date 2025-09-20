@@ -1,0 +1,22 @@
+server {
+    server_name lamfo.org;
+    listen 80;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080; # Frontend
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /api/lamfo-gpt {
+        proxy_pass http://127.0.0.1:3000; # ChatBot
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
