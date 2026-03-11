@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-source-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "LAMFO",
-  description: "Laboratório de Aprendizagem de Máquinas em Finanças e Organizações",
+  title: "LAMFO | Laboratório de Aprendizagem de Máquinas em Finanças e Organizações",
+  description: "Think tank da Universidade de Brasília dedicado ao avanço da teoria de IA e promoção do uso ético da inteligência artificial na sociedade.",
   icons: {
     icon: "/favicon.svg",
   }
@@ -23,14 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${inter.className}`}
-      >
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+      <body className={`${outfit.variable} ${sourceSans.variable} font-[family-name:var(--font-source-sans)]`}>
+        {children}
       </body>
     </html>
   );

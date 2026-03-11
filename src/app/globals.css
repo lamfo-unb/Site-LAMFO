@@ -1,16 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy-50: #eaebf6;
+  --navy-100: #c5c7e8;
+  --navy-200: #9295d6;
+  --navy-300: #6064c4;
+  --navy-400: #3a3eb6;
+  --navy-500: #2424a8;
+  --navy-600: #1f1f95;
+  --navy-700: #191982;
+  --navy-800: #13136e;
+  --navy-900: #0d0d5a;
+
+  --green-50: #eef6e6;
+  --green-100: #d4e8b8;
+  --green-200: #b8da8a;
+  --green-300: #9bcc5c;
+  --green-400: #6db32e;
+  --green-500: #3f8c00;
+  --green-600: #377a00;
+  --green-700: #2f6800;
+  --green-800: #275600;
+  --green-900: #1f4400;
+
+  --background: #fafbfc;
+  --foreground: #0f1729;
+  --surface: #ffffff;
+  --surface-subtle: #f4f6f8;
+  --border: #e2e6eb;
+  --muted: #6b7a8d;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Line clamp utility */
 .line-clamp-3 {
   overflow: hidden;
   display: -webkit-box;
@@ -18,3 +46,68 @@ body {
   -webkit-line-clamp: 3;
   line-clamp: 3;
 }
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(36, 36, 168, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36, 36, 168, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-dots {
+  background-image: radial-gradient(circle, rgba(36, 36, 168, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+.text-gradient-navy {
+  background: linear-gradient(135deg, var(--navy-500), var(--navy-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, var(--green-500), var(--green-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--navy-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--navy-100);
+  color: var(--navy-900);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--surface-subtle); }
+::-webkit-scrollbar-thumb { background: var(--navy-200); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--navy-300); }

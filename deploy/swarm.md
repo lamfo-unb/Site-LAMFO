@@ -1,8 +1,8 @@
 ```
 docker service create \
-  --env NEXT_PUBLIC_API_CHATBOT_URL=https://lamfo.org/api/lamfo-gpt/chat \
+  --env API_URL=http://backend:3000 \
   --replicas 1 \
-  --name site-lamfo \
-  --publish published=8080,target=3000 \
-  dauid64/site-lamfo:1.0
+  --name frontend-site-lamfo \
+  --publish published=8080,target=8080 \
+  dauid64/frontend-site-lamfo:latest
 ```
