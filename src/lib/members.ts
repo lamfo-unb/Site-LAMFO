@@ -1,9 +1,9 @@
-import * as TOML from '@iarna/toml';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import { generateSlug } from './utils';
+import { fetchMembers } from './api-client';
+import { ApiMember } from './api-types';
 
 export interface Member {
+  id: string;
   name: string;
   role: string;
   department?: string;
@@ -37,113 +37,58 @@ export interface MembersData {
   };
 }
 
-interface TomlMembersData {
-  coordinators: {
-    member: Member[];
-  };
-  professors: {
-    member: Member[];
-  };
-  current_students: {
-    member: Member[];
-  };
-  alumni: {
-    member: Member[];
-  };
-  research_areas: {
-    areas: string[];
+function apiMemberToMember(m: ApiMember): Member {
+  return {
+    id: m.id,
+    name: m.name,
+    role: m.cargo?.name || '',
+    department: m.department || undefined,
+    program: m.program || undefined,
+    research_area: m.researchArea || undefined,
+    graduation_year: m.graduationYear || undefined,
+    current_position: m.currentPosition || undefined,
+    thesis_title: m.thesisTitle || undefined,
+    bio: m.description || '',
+    email: m.email,
+    image: m.image || '',
+    linkedin: m.linkedin || undefined,
+    lattes: m.lattes || undefined,
   };
 }
 
-// Server-side only function
-export function loadMembersData(): MembersData {
-  const membersPath = join(process.cwd(), 'data', 'members.toml');
-  const fileContent = readFileSync(membersPath, 'utf-8');
-  const parsedData = TOML.parse(fileContent) as unknown as TomlMembersData;
-  
-  // Create a clean object without symbols
-  const cleanData: MembersData = {
-    coordinators: {
-      member: parsedData.coordinators.member.map((member: Member) => ({
-        name: member.name,
-        role: member.role,
-        department: member.department,
-        program: member.program,
-        research_area: member.research_area,
-        graduation_year: member.graduation_year,
-        current_position: member.current_position,
-        thesis_title: member.thesis_title,
-        bio: member.bio,
-        email: member.email,
-        image: member.image,
-        linkedin: member.linkedin,
-        lattes: member.lattes,
-      })),
-    },
-    professors: {
-      member: parsedData.professors.member.map((member: Member) => ({
-        name: member.name,
-        role: member.role,
-        department: member.department,
-        program: member.program,
-        research_area: member.research_area,
-        graduation_year: member.graduation_year,
-        current_position: member.current_position,
-        thesis_title: member.thesis_title,
-        bio: member.bio,
-        email: member.email,
-        image: member.image,
-        linkedin: member.linkedin,
-        lattes: member.lattes,
-      })),
-    },
-    current_students: {
-      member: parsedData.current_students.member.map((member: Member) => ({
-        name: member.name,
-        role: member.role,
-        department: member.department,
-        program: member.program,
-        research_area: member.research_area,
-        graduation_year: member.graduation_year,
-        current_position: member.current_position,
-        thesis_title: member.thesis_title,
-        bio: member.bio,
-        email: member.email,
-        image: member.image,
-        linkedin: member.linkedin,
-        lattes: member.lattes,
-      })),
-    },
-    alumni: {
-      member: parsedData.alumni.member.map((member: Member) => ({
-        name: member.name,
-        role: member.role,
-        department: member.department,
-        program: member.program,
-        research_area: member.research_area,
-        graduation_year: member.graduation_year,
-        current_position: member.current_position,
-        thesis_title: member.thesis_title,
-        bio: member.bio,
-        email: member.email,
-        image: member.image,
-        linkedin: member.linkedin,
-        lattes: member.lattes,
-      })),
-    },
-    research_areas: {
-      areas: [...parsedData.research_areas.areas],
-    },
+export async function loadMembersData(): Promise<MembersData> {
+  const apiMembers = await fetchMembers();
+
+  const coordinators = apiMembers
+    .filter((m) => m.category === 'COORDINATOR')
+    .map(apiMemberToMember);
+  const professors = apiMembers
+    .filter((m) => m.category === 'PROFESSOR')
+    .map(apiMemberToMember);
+  const current_students = apiMembers
+    .filter((m) => m.category === 'CURRENT_STUDENT')
+    .map(apiMemberToMember);
+  const alumni = apiMembers
+    .filter((m) => m.category === 'ALUMNI')
+    .map(apiMemberToMember);
+
+  const allAreas = apiMembers
+    .map((m) => m.researchArea)
+    .filter((a): a is string => !!a);
+  const uniqueAreas = [...new Set(allAreas)];
+
+  return {
+    coordinators: { member: coordinators },
+    professors: { member: professors },
+    current_students: { member: current_students },
+    alumni: { member: alumni },
+    research_areas: { areas: uniqueAreas },
   };
-  
-  return cleanData;
 }
 
-// Helper function to find member by slug
-export function findMemberBySlug(slug: string): { member: Member; category: string } | null {
-  const membersData = loadMembersData();
-  
-  // Search in all categories
+export async function findMemberBySlug(slug: string): Promise<{ member: Member; category: string } | null> {
+  const membersData = await loadMembersData();
+
   const categories = [
     { name: 'coordinators', members: membersData.coordinators.member },
     { name: 'professors', members: membersData.professors.member },
