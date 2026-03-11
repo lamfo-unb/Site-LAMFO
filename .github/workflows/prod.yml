@@ -49,5 +49,5 @@ jobs:
           username: root
           key: ${{ secrets.DROPLET_SSH_KEY }}
           script: |
-            docker pull dauid64/site-lamfo:latest
-            docker service update site-lamfo --image dauid64/site-lamfo:latest --force
+            docker pull dauid64/frontend-site-lamfo:latest
+            docker service update frontend-site-lamfo --image dauid64/frontend-site-lamfo:latest --force
