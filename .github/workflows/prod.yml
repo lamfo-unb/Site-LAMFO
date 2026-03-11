@@ -47,7 +47,7 @@ jobs:
         with:
           host: ${{ vars.DROPLET_IP }}
           username: root
-          password: ${{ secrets.DROPLET_PASSWORD }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
           script: |
             docker pull dauid64/site-lamfo:latest
             docker service update site-lamfo --image dauid64/site-lamfo:latest --force
